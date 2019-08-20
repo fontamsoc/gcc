@@ -76,7 +76,7 @@ call_ ## FUNC (void)					\
   asm (SECTION_OP);					\
   FUNC ();						\
   FORCE_CODE_SECTION_ALIGN				\
-  asm (__LIBGCC_TEXT_SECTION_ASM_OP__);				\
+  asm (".previous");					\
 }
 #endif
 

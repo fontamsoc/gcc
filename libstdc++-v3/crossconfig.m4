@@ -5,7 +5,7 @@ dnl
 AC_DEFUN([GLIBCXX_CROSSCONFIG],[
 # Base decisions on target environment.
 case "${host}" in
-  arm*-*-symbianelf*)
+  arm*-*-symbianelf* | pu32-*)
     # This is a freestanding configuration; there is nothing to do here.
     ;;
 

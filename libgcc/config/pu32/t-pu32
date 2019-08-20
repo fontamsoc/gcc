@@ -1,0 +1,10 @@
+CRTSTUFF_T_CFLAGS += -DUSE_TM_CLONE_REGISTRY=0
+
+crt0.o: $(srcdir)/config/pu32/crt0.S
+	$(gcc_compile) -c $<
+
+crtbegin_no_eh.o: $(srcdir)/crtstuff.c
+	$(crt_compile) -U__LIBGCC_EH_FRAME_SECTION_NAME__ -c $< -DCRT_BEGIN
+
+crtend_no_eh.o: $(srcdir)/crtstuff.c
+	$(crt_compile) -U__LIBGCC_EH_FRAME_SECTION_NAME__ -c $< -DCRT_END

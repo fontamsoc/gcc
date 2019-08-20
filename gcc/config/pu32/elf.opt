@@ -1,0 +1,14 @@
+; Options for the PU32 compiler.
+
+rdynamic
+Driver
+
+mzpoprp
+Target Report Var(TARGET_ZPOPRP)
+zpop %rp in function epilogue; improve stacktrace.
+
+posix
+Driver
+
+pthread
+Driver
