@@ -127,6 +127,8 @@ ft32*)	cpu_type=ft32
 	;;
 moxie*)	cpu_type=moxie
 	;;
+pu32*)	cpu_type=pu32
+	;;
 i[34567]86-*-*)
 	cpu_type=i386
 	;;
@@ -1251,6 +1253,10 @@ powerpcle-*-eabi*)
 pru-*-*)
 	tmake_file="${tmake_file} t-softfp-sfdf t-softfp-excl t-softfp t-gnu-prefix pru/t-pru"
 	tm_file="$tm_file pru/pru-abi.h"
+	;;
+pu32-*-elf)
+	tmake_file="${tmake_file} pu32/t-pu32 t-softfp-sfdf t-softfp-excl t-softfp"
+	extra_parts="$extra_parts crt0.o crti.o crtn.o crtbegin.o crtend.o crtbegin_no_eh.o crtend_no_eh.o"
 	;;
 riscv*-*-linux*)
 	tmake_file="${tmake_file} riscv/t-softfp${host_address} t-softfp riscv/t-elf riscv/t-elf${host_address} t-slibgcc-libgcc"
