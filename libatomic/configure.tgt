@@ -39,6 +39,7 @@ case "${target_cpu}" in
   rs6000 | powerpc*)	ARCH=powerpc ;;
   riscv*)		ARCH=riscv ;;
   sh*)			ARCH=sh ;;
+  pu32*)		ARCH=pu32 ;;
 
   aarch64*)
 	ARCH=aarch64
@@ -134,7 +135,8 @@ case "${target}" in
 	config_path="${config_path} s390 posix"
 	;;
 
-  *-*-linux* | *-*-gnu* | *-*-k*bsd*-gnu \
+  pu32* \
+  | *-*-linux* | *-*-gnu* | *-*-k*bsd*-gnu \
   | *-*-netbsd* | *-*-freebsd* | *-*-openbsd* | *-*-dragonfly* \
   | *-*-solaris2* | *-*-sysv4* | *-*-irix6* | *-*-osf* | *-*-hpux11* \
   | *-*-darwin* | *-*-aix* | *-*-cygwin*)
