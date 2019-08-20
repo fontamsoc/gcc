@@ -86,6 +86,7 @@ LIST = aarch64-elf aarch64-linux-gnu aarch64-rtems \
   powerpc-lynxos powerpcle-elf \
   powerpcle-eabisim powerpcle-eabi \
   pru-elf \
+  pu32-elf \
   riscv32-unknown-linux-gnu riscv64-unknown-linux-gnu \
   powerpc-ibm-aix7.1 powerpc-ibm-aix7.2 \
   rl78-elf rx-elf s390-linux-gnu s390x-linux-gnu s390x-ibm-tpf sh-elf \
