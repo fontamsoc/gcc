@@ -1676,7 +1676,7 @@ moxie-*-moxiebox*)
 	tm_file="${tm_file} dbxelf.h elfos.h moxie/moxiebox.h newlib-stdint.h"
 	tmake_file="${tmake_file} moxie/t-moxiebox"
 	;;
-pu32-*-elf)
+pu32*-*-*)
 	gas=yes
 	gnu_ld=yes
 	tm_file="dbxelf.h elfos.h newlib-stdint.h ${tm_file}"

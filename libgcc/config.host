@@ -1254,7 +1254,7 @@ pru-*-*)
 	tmake_file="${tmake_file} t-softfp-sfdf t-softfp-excl t-softfp t-gnu-prefix pru/t-pru"
 	tm_file="$tm_file pru/pru-abi.h"
 	;;
-pu32-*-elf)
+pu32*-*-*)
 	tmake_file="${tmake_file} pu32/t-pu32 t-softfp-sfdf t-softfp-excl t-softfp"
 	extra_parts="$extra_parts crt0.o crti.o crtn.o crtbegin.o crtend.o crtbegin_no_eh.o crtend_no_eh.o"
 	;;
