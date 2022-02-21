@@ -18,6 +18,7 @@
 #include "emit-rtl.h"
 #include "diagnostic-core.h"
 #include "output.h"
+#include "insn-attr.h"
 #include "stor-layout.h"
 #include "varasm.h"
 #include "calls.h"
@@ -237,6 +238,24 @@ static void pu32_set_current_function (tree decl) {
 		return;
 	cfun->machine->isnaked = pu32_is_naked_function (decl);
 	cfun->machine->isnoreturn = TREE_THIS_VOLATILE (decl);
+}
+
+// Implement TARGET_INSN_COST.
+static int pu32_insn_cost (rtx_insn *insn, bool speed) {
+
+	if (INSN_CODE (insn) < 0)
+		return 0;
+
+	int cost_length = (get_attr_length (insn) / 2);
+	if (!speed)
+		return cost_length;
+
+	// Use cost if provided.
+	int cost = get_attr_cost (insn);
+	if (cost > 0)
+		return cost;
+
+	return cost_length;
 }
 
 const char *pu32_output_return () {
@@ -721,6 +740,9 @@ rtx gen_pu32_tga (void) {
 #define TARGET_WARN_FUNC_RETURN pu32_warn_func_return
 #undef  TARGET_SET_CURRENT_FUNCTION
 #define TARGET_SET_CURRENT_FUNCTION pu32_set_current_function
+
+#undef  TARGET_INSN_COST
+#define TARGET_INSN_COST pu32_insn_cost
 
 #undef  TARGET_HAVE_TLS
 #define TARGET_HAVE_TLS true
