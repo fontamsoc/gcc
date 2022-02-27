@@ -442,6 +442,8 @@ void pu32_expand_prologue (void) {
 
 void pu32_expand_epilogue (void) {
 
+	emit_insn (gen_blockage ());
+
 	HOST_WIDE_INT outargs_size_localvars_size =
 		cfun->machine->outargs_size_localvars_size;
 	if (outargs_size_localvars_size) {
@@ -481,8 +483,6 @@ void pu32_expand_epilogue (void) {
 
 	if (!cfun->machine->isnaked)
 		emit_jump_insn (gen_retlr ());
-
-	emit_insn (gen_blockage ());
 }
 
 // Implement TARGET_ASM_FUNCTION_PROLOGUE.
