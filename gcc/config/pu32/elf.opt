@@ -4,7 +4,7 @@ rdynamic
 Driver
 
 mzpoprp
-Target Report Var(TARGET_ZPOPRP)
+Target Var(TARGET_ZPOPRP)
 zpop %rp in function epilogue; improve stacktrace.
 
 posix
