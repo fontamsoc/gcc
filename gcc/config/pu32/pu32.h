@@ -11,7 +11,7 @@
 #define ENDFILE_SPEC "%{fno-exceptions:crtend_no_eh.o%s; :crtend.o%s} crtn.o%s"
 
 #undef CPP_SPEC
-#define CPP_SPEC "%{posix:-D_POSIX_SOURCE} %{pthread:-D_REENTRANT}"
+#define CPP_SPEC "%{posix:-D_POSIX_SOURCE}"
 
 #undef LIB_SPEC
 #define LIB_SPEC "%{!shared:%{!symbolic:-lc}} %{pthread:-lpthread}"
