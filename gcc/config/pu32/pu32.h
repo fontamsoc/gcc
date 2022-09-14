@@ -158,6 +158,14 @@ enum reg_class {
   1                           \
 }
 
+#define REG_ALLOC_ORDER { \
+   9,  8,  7,  6,         \
+   5,  4,  3,  2,         \
+   1, 11, 12, 13,         \
+  14, 15, 10,  0,         \
+  16                      \
+}
+
 #define REGNO_REG_CLASS(R) (((R) <= 16) ? GENERAL_REGS : NO_REGS)
 
 #define ACCUMULATE_OUTGOING_ARGS 1
