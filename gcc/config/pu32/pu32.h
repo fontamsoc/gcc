@@ -91,7 +91,7 @@
 // as well as match the names used in REGISTER_NAMES.
 #define STACK_POINTER_REGNUM 0
 #define PU32_RETURN_VALUE_REGNUM PU32_FIRST_ARG_REGNUM
-#define PU32_TASK_POINTER_REGNUM 10 /* Used by Linux-Kernel as %tp through -Wa,mfixed-%10 */
+#define PU32_TASK_POINTER_REGNUM 10
 #define PU32_STRUCT_VALUE_REGNUM 11
 #define STATIC_CHAIN_REGNUM 12
 #define PU32_SCRATCH_REGNUM 13
@@ -136,7 +136,7 @@ enum reg_class {
 #define REGISTER_NAMES {      \
   "%sp",  "%1",  "%2",  "%3", \
   "%4",  "%5",  "%6",  "%7",  \
-  "%8",  "%9",  "%10", "%11", \
+  "%8",  "%9",  "%tp", "%11", \
   "%12", "%sr", "%fp", "%rp", \
   "%ap"                       \
 }
@@ -144,7 +144,7 @@ enum reg_class {
 #define FIXED_REGISTERS { \
   1, 0, 0, 0,             \
   0, 0, 0, 0,             \
-  0, 0, 0, 0,             \
+  0, 0, 1, 0,             \
   0, 1, 1, 1,             \
   1                       \
 }
