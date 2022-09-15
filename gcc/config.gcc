@@ -378,7 +378,7 @@ moxie*)	cpu_type=moxie
 	target_has_targetm_common=no
 	;;
 pu32*)	cpu_type=pu32
-	target_has_targetm_common=no
+	target_has_targetm_common=yes
 	;;
 fido-*-*)
 	cpu_type=m68k
