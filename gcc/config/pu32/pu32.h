@@ -14,10 +14,16 @@
 #define CPP_SPEC "%{posix:-D_POSIX_SOURCE}"
 
 #undef LIB_SPEC
-#define LIB_SPEC "%{!shared:%{!symbolic:-lc}} %{pthread:-lpthread}"
+#define LIB_SPEC	" --start-group" \
+			" %{!shared:%{!symbolic:-lc}} %{pthread:-lpthread}" \
+			" --end-group"
 
 #undef  LINK_SPEC
-#define LINK_SPEC "%{h*} %{v:-V} %{static:-Bstatic} %{shared:-shared} %{symbolic:-Bsymbolic} %{rdynamic:-export-dynamic}"
+#define LINK_SPEC	" %{h*} %{v:-V}" \
+			" %{static:-Bstatic}" \
+			" %{shared:-shared}" \
+			" %{symbolic:-Bsymbolic}" \
+			" %{rdynamic:-export-dynamic}"
 
 #undef  ASM_SPEC
 #define ASM_SPEC "%{ffixed-*:-mfixed-%*} -mrelax"
