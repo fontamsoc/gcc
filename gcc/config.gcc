@@ -1757,7 +1757,7 @@ moxie-*-moxiebox*)
 pu32*-*-*)
 	gas=yes
 	gnu_ld=yes
-	tm_file="dbxelf.h elfos.h newlib-stdint.h ${tm_file}"
+	tm_file="${tm_file} elfos.h newlib-stdint.h"
 	extra_options="${extra_options} pu32/elf.opt"
 	;;
 h8300-*-elf*)
