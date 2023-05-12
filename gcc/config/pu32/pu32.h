@@ -14,16 +14,18 @@
 #define CPP_SPEC "%{posix:-D_POSIX_SOURCE}"
 
 #undef LIB_SPEC
-#define LIB_SPEC	" --start-group" \
-			" %{!shared:%{!symbolic:-lc}} %{pthread:-lpthread}" \
-			" --end-group"
+#define LIB_SPEC \
+  " --start-group" \
+  " %{!shared:%{!symbolic:-lc}} %{pthread:-lpthread}" \
+  " --end-group"
 
 #undef  LINK_SPEC
-#define LINK_SPEC	" %{h*} %{v:-V}" \
-			" %{static:-Bstatic}" \
-			" %{shared:-shared}" \
-			" %{symbolic:-Bsymbolic}" \
-			" %{rdynamic:-export-dynamic}"
+#define LINK_SPEC \
+  " %{h*} %{v:-V}" \
+  " %{static:-Bstatic}" \
+  " %{shared:-shared}" \
+  " %{symbolic:-Bsymbolic}" \
+  " %{rdynamic:-export-dynamic}"
 
 #undef  ASM_SPEC
 #define ASM_SPEC "%{ffixed-*:-mfixed-%*} -mrelax"
@@ -35,19 +37,19 @@
 #define FILE_ASM_OP "\t.file\n"
 #define TEXT_SECTION_ASM_OP "\t.text"
 #define DATA_SECTION_ASM_OP "\t.data"
-#define ASM_OUTPUT_ALIGN(STREAM,POWER)       \
+#define ASM_OUTPUT_ALIGN(STREAM,POWER) \
   fprintf (STREAM, "\t.p2align\t%d\n", POWER);
 #define GLOBAL_ASM_OP "\t.global\t"
 
 #define TARGET_CPU_CPP_BUILTINS() { \
-  builtin_define ("__PU32__");      \
+  builtin_define ("__PU32__"); \
 }
 
-#define TARGET_OS_CPP_BUILTINS()      \
-  do {                                \
+#define TARGET_OS_CPP_BUILTINS() \
+  do { \
     builtin_define ("__gnu_linux__"); \
-    builtin_define_std ("linux");     \
-    builtin_define_std ("unix");      \
+    builtin_define_std ("linux"); \
+    builtin_define_std ("unix"); \
   } while (0)
 
 #undef  TARGET_DEFAULT
@@ -105,13 +107,13 @@
 #define PU32_RETURN_POINTER_REGNUM 15
 #define ARG_POINTER_REGNUM 16
 
-#define ELIMINABLE_REGS {                         \
+#define ELIMINABLE_REGS { \
   { ARG_POINTER_REGNUM,   STACK_POINTER_REGNUM }, \
   { ARG_POINTER_REGNUM,   FRAME_POINTER_REGNUM }, \
   { FRAME_POINTER_REGNUM, STACK_POINTER_REGNUM }, \
 }
 
-#define INITIAL_ELIMINATION_OFFSET(FROM, TO, OFFSET)      \
+#define INITIAL_ELIMINATION_OFFSET(FROM, TO, OFFSET) \
   (OFFSET) = pu32_initial_elimination_offset ((FROM), (TO))
 
 #define STACK_POINTER_OFFSET 0
@@ -127,32 +129,32 @@ enum reg_class {
 
 #define N_REG_CLASSES LIM_REG_CLASSES
 
-#define REG_CLASS_CONTENTS {           \
-  { 0x00000000 }, /* Empty */          \
+#define REG_CLASS_CONTENTS { \
+  { 0x00000000 }, /* Empty */ \
   { 0x0001FFFF }, /* %0 to %15, %ap */ \
   { 0x0001FFFF }  /* All registers */  \
 }
 
 #define REG_CLASS_NAMES { \
-  "NO_REGS",              \
-  "GENERAL_REGS",         \
-  "ALL_REGS"              \
+  "NO_REGS", \
+  "GENERAL_REGS", \
+  "ALL_REGS" \
 }
 
-#define REGISTER_NAMES {      \
+#define REGISTER_NAMES { \
   "%sp",  "%1",  "%2",  "%3", \
   "%4",  "%5",  "%6",  "%7",  \
   "%8",  "%9",  "%tp", "%11", \
   "%12", "%sr", "%fp", "%rp", \
-  "%ap"                       \
+  "%ap" \
 }
 
 #define FIXED_REGISTERS { \
-  1, 0, 0, 0,             \
-  0, 0, 0, 0,             \
-  0, 0, 1, 0,             \
-  0, 1, 1, 1,             \
-  1                       \
+  1, 0, 0, 0, \
+  0, 0, 0, 0, \
+  0, 0, 1, 0, \
+  0, 1, 1, 1, \
+  1 \
 }
 
 // All fields set 1; making the caller responsible
@@ -160,19 +162,19 @@ enum reg_class {
 // the callee needing to save and restore registers
 // that it is using.
 #define CALL_USED_REGISTERS { \
-  1, 1, 1, 1,                 \
-  1, 1, 1, 1,                 \
-  1, 1, 1, 1,                 \
-  1, 1, 1, 1,                 \
-  1                           \
+  1, 1, 1, 1, \
+  1, 1, 1, 1, \
+  1, 1, 1, 1, \
+  1, 1, 1, 1, \
+  1 \
 }
 
 #define REG_ALLOC_ORDER { \
-   9,  8,  7,  6,         \
-   5,  4,  3,  2,         \
-   1, 11, 12, 13,         \
-  14, 15, 10,  0,         \
-  16                      \
+   9,  8,  7,  6, \
+   5,  4,  3,  2, \
+   1, 11, 12, 13, \
+  14, 15, 10,  0, \
+  16 \
 }
 
 #define REGNO_REG_CLASS(R) (((R) <= 16) ? GENERAL_REGS : NO_REGS)
@@ -211,9 +213,9 @@ enum reg_class {
 
 #define MAX_FIXED_MODE_SIZE BITS_PER_WORD
 
-#define DATA_ALIGNMENT(TYPE, ALIGN)                        \
-  (TREE_CODE (TYPE) == ARRAY_TYPE &&                       \
-  TYPE_MODE (TREE_TYPE (TYPE)) == QImode &&                \
+#define DATA_ALIGNMENT(TYPE, ALIGN) \
+  (TREE_CODE (TYPE) == ARRAY_TYPE && \
+  TYPE_MODE (TREE_TYPE (TYPE)) == QImode && \
   (ALIGN) < FASTEST_ALIGNMENT ? FASTEST_ALIGNMENT : (ALIGN))
 
 #define STRICT_ALIGNMENT 1
@@ -227,21 +229,21 @@ enum reg_class {
 
 #define FUNCTION_MODE SImode
 
-#define FUNCTION_ARG_REGNO_P(R)                    \
-  (((R) >= PU32_FIRST_ARG_REGNUM) &&               \
+#define FUNCTION_ARG_REGNO_P(R) \
+  (((R) >= PU32_FIRST_ARG_REGNUM) && \
   ((R) < (PU32_FIRST_ARG_REGNUM+PU32_NUM_ARG_REGS)))
 
 #define BASE_REG_CLASS GENERAL_REGS
 #define INDEX_REG_CLASS GENERAL_REGS
 
-#define HARD_REGNO_OK_FOR_BASE_P(R)  \
+#define HARD_REGNO_OK_FOR_BASE_P(R) \
   (REGNO_REG_CLASS(R) == GENERAL_REGS)
 
 #ifdef REG_OK_STRICT
 #define REGNO_OK_FOR_BASE_P(R) \
   HARD_REGNO_OK_FOR_BASE_P(R)
 #else
-#define REGNO_OK_FOR_BASE_P(R)     \
+#define REGNO_OK_FOR_BASE_P(R) \
   ((R) >= FIRST_PSEUDO_REGISTER || \
   HARD_REGNO_OK_FOR_BASE_P(R))
 #endif
@@ -260,12 +262,12 @@ enum reg_class {
 
 #define DEFAULT_PCC_STRUCT_RETURN 0
 
-#define INCOMING_RETURN_ADDR_RTX                \
+#define INCOMING_RETURN_ADDR_RTX \
   gen_rtx_REG (Pmode, PU32_RETURN_POINTER_REGNUM)
-#define EH_RETURN_DATA_REGNO(N)                 \
-  (((N) < PU32_NUM_ARG_REGS) ?                  \
+#define EH_RETURN_DATA_REGNO(N) \
+  (((N) < PU32_NUM_ARG_REGS) ? \
     (PU32_FIRST_ARG_REGNUM+(N)) : INVALID_REGNUM)
-#define EH_RETURN_HANDLER_RTX                   \
+#define EH_RETURN_HANDLER_RTX \
   gen_rtx_REG (Pmode, PU32_RETURN_POINTER_REGNUM)
 
 #endif /* GCC_PU32_H */
