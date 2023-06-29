@@ -551,28 +551,25 @@ static rtx pu32_function_arg (
 	cumulative_args_t cum_v,
 	const function_arg_info &arg) {
 	CUMULATIVE_ARGS *cum = get_cumulative_args (cum_v);
-	return ((*cum < (PU32_FIRST_ARG_REGNUM + PU32_NUM_ARG_REGS)) && arg.named) ?
+	int nreg = CEIL (arg.promoted_size_in_bytes(), UNITS_PER_WORD);
+	return (((*cum + nreg) <= (PU32_FIRST_ARG_REGNUM + PU32_NUM_ARG_REGS)) && arg.named) ?
 		gen_rtx_REG (arg.mode, *cum) : NULL_RTX;
 }
 
 // Implement TARGET_FUNCTION_ARG_ADVANCE.
 static void pu32_function_arg_advance (
 	cumulative_args_t cum_v,
-	const function_arg_info &arg ATTRIBUTE_UNUSED) {
+	const function_arg_info &arg) {
 	CUMULATIVE_ARGS *cum = get_cumulative_args (cum_v);
-	*cum = (*cum < (PU32_FIRST_ARG_REGNUM + PU32_NUM_ARG_REGS) ? *cum + 1 : *cum);
+	int nreg = CEIL (arg.promoted_size_in_bytes(), UNITS_PER_WORD);
+	*cum = ((*cum < (PU32_FIRST_ARG_REGNUM + PU32_NUM_ARG_REGS)) ? (*cum + nreg) : *cum);
 }
 
 // Implement TARGET_PASS_BY_REFERENCE.
 static bool pu32_pass_by_reference (
 	cumulative_args_t cum ATTRIBUTE_UNUSED,
 	const function_arg_info &arg) {
-	machine_mode mode = arg.mode;
-	const_tree type = arg.type;
-	return (((mode != BLKmode && mode != VOIDmode) ?
-			GET_MODE_SIZE(mode) :
-			(unsigned HOST_WIDE_INT)int_size_in_bytes(type)) >
-		UNITS_PER_WORD);
+	return (arg.mode == BLKmode);
 }
 
 // Implement TARGET_ARG_PARTIAL_BYTES.
