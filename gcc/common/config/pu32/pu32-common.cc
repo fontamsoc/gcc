@@ -22,8 +22,8 @@ static const struct default_options pu32_option_optimization_table[] = {
 	{ OPT_LEVELS_2_PLUS, OPT_fgcse_las, NULL, 1 },
 	// Enable fgcse-after-reload at -O2 and higher.
 	{ OPT_LEVELS_2_PLUS, OPT_fgcse_after_reload, NULL, 1 },
-	// Disable fcaller-saves by default.
-	{ OPT_LEVELS_ALL, OPT_fcaller_saves, NULL, 0 },
+	// Enable fcaller-saves by default.
+	{ OPT_LEVELS_ALL, OPT_fcaller_saves, NULL, 1 },
 	{ OPT_LEVELS_NONE, 0, NULL, 0 }
 };
 
