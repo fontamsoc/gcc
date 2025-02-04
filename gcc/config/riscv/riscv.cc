@@ -12417,6 +12417,19 @@ riscv_option_override (void)
     if (riscv_cmodel == CM_MEDLOW)
       target_flags |= MASK_EXPLICIT_RELOCS;
 
+  /* The GPR save/restore millicode routines in libgcc are entered with
+     "call t0,__riscv_save_N" and left with "tail __riscv_restore_N", so they
+     require x5/t0 to be recognized as an alternate link register by the core's
+     return-address stack.  RVPU recognizes only x1/ra, so every millicode call
+     and return mispredicts.  Never use the millicode, whatever the command
+     line asked for.  */
+  if (TARGET_SAVE_RESTORE)
+    {
+      warning (0, "%<-msave-restore%> is not supported on this target; "
+	       "option ignored");
+      target_flags &= ~MASK_SAVE_RESTORE;
+    }
+
   /* Require that the ISA supports the requested floating-point ABI.  */
   if (UNITS_PER_FP_ARG > (TARGET_HARD_FLOAT ? UNITS_PER_FP_REG : 0))
     error ("requested ABI requires %<-march%> to subsume the %qc extension",
