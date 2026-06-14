@@ -30,7 +30,7 @@ Target RejectNegative InverseMask(BIG_ENDIAN)
 Assume target CPU is configured as little endian.
 
 mbranch-cost=
-Target RejectNegative Joined UInteger Var(riscv_branch_cost)
+Target RejectNegative Joined UInteger Var(riscv_branch_cost) Init(2)
 -mbranch-cost=N	Set the cost of branches to roughly N instructions.
 
 mplt
