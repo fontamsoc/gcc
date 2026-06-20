@@ -81,6 +81,10 @@ mdiv
 Target Mask(DIV)
 Use hardware instructions for integer division.
 
+mfused-madd
+Target Var(TARGET_FUSED_MADD) Init(0)
+Use hardware floating-point fused multiply-add (R4-type) instructions.
+
 march=
 Target RejectNegative Joined Negative(march=) Var(riscv_arch_string) Save
 -march=	Generate code for given RISC-V ISA (e.g. RV64IM).  ISA strings must be
